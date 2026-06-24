@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<div id="a11y-panel" style="display:none; background:#f4f6fb; padding:20px 0; border-bottom:2px solid #0c1630; color:#0c1630; font-family:Arial, sans-serif; position:relative; z-index:1000;">
+  <div style="width:100%; padding:0 max(56px, calc(50vw - 640px)); margin:0 auto; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:20px; font-size:14px; text-align:center;">
+    
+    <div style="display:flex; flex-direction:column; gap:6px; align-items:center;">
+      <span style="font-size:12px; font-weight:600;">Шрифт</span>
+      <div style="display:flex; border:1px solid #0c1630; background:#fff; border-radius:4px; overflow:hidden;">
+        <button type="button" data-action="setA11yFont" data-val="arial" style="padding:6px 12px; border:none; border-right:1px solid #0c1630; background:transparent; cursor:pointer;">Arial</button>
+        <button type="button" data-action="setA11yFont" data-val="times" style="padding:6px 12px; border:none; border-right:1px solid #0c1630; background:transparent; cursor:pointer;">Times</button>
+        <button type="button" data-action="setA11yFont" data-val="courier" style="padding:6px 12px; border:none; background:transparent; cursor:pointer;">Courier</button>
+      </div>
+      <span id="a11y-font-label" style="font-size:11px; color:#555;">Без засечек</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:6px; align-items:center;">
+      <span style="font-size:12px; font-weight:600;">Размер шрифта</span>
+      <div style="display:flex; border:1px solid #0c1630; background:#fff; border-radius:4px; overflow:hidden;">
+        <button type="button" data-action="setA11ySize" data-val="normal" style="padding:6px 16px; border:none; border-right:1px solid #0c1630; background:transparent; cursor:pointer; font-size:14px;">А-</button>
+        <button type="button" data-action="setA11ySize" data-val="large" style="padding:6px 16px; border:none; background:transparent; cursor:pointer; font-size:16px;">А+</button>
+      </div>
+      <span id="a11y-size-label" style="font-size:11px; color:#555;">Обычный</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:6px; align-items:center;">
+      <span style="font-size:12px; font-weight:600;">Кернинг</span>
+      <div style="display:flex; border:1px solid #0c1630; background:#fff; border-radius:4px; overflow:hidden;">
+        <button type="button" data-action="setA11yKerning" data-val="normal" style="padding:6px 12px; border:none; border-right:1px solid #0c1630; background:transparent; cursor:pointer;">1.0</button>
+        <button type="button" data-action="setA11yKerning" data-val="medium" style="padding:6px 12px; border:none; border-right:1px solid #0c1630; background:transparent; cursor:pointer;">1.5</button>
+        <button type="button" data-action="setA11yKerning" data-val="large" style="padding:6px 12px; border:none; background:transparent; cursor:pointer;">2.0</button>
+      </div>
+      <span id="a11y-kerning-label" style="font-size:11px; color:#555;">Стандартный</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:6px; align-items:center;">
+      <span style="font-size:12px; font-weight:600;">Интервал</span>
+      <div style="display:flex; border:1px solid #0c1630; background:#fff; border-radius:4px; overflow:hidden;">
+        <button type="button" data-action="setA11ySpacing" data-val="normal" style="padding:6px 12px; border:none; border-right:1px solid #0c1630; background:transparent; cursor:pointer;">1.0</button>
+        <button type="button" data-action="setA11ySpacing" data-val="medium" style="padding:6px 12px; border:none; border-right:1px solid #0c1630; background:transparent; cursor:pointer;">1.5</button>
+        <button type="button" data-action="setA11ySpacing" data-val="large" style="padding:6px 12px; border:none; background:transparent; cursor:pointer;">2.0</button>
+      </div>
+      <span id="a11y-spacing-label" style="font-size:11px; color:#555;">Одинарный</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:6px; align-items:center;">
+      <span style="font-size:12px; font-weight:600;">Цвет</span>
+      <div style="display:flex; border:1px solid #0c1630; background:#fff; border-radius:4px; overflow:hidden;">
+        <button type="button" data-action="setA11yTheme" data-val="bw" style="padding:6px 10px; border:none; background:#fff; color:#000; border-right:1px solid #0c1630; cursor:pointer; font-weight:bold;">Ц</button>
+        <button type="button" data-action="setA11yTheme" data-val="wb" style="padding:6px 10px; border:none; background:#000; color:#fff; border-right:1px solid #0c1630; cursor:pointer; font-weight:bold;">Ц</button>
+        <button type="button" data-action="setA11yTheme" data-val="yb" style="padding:6px 10px; border:none; background:#000; color:#ff0; border-right:1px solid #0c1630; cursor:pointer; font-weight:bold;">Ц</button>
+        <button type="button" data-action="setA11yTheme" data-val="blue" style="padding:6px 10px; border:none; background:#9dd1ff; color:#063462; border-right:1px solid #0c1630; cursor:pointer; font-weight:bold;">Ц</button>
+        <button type="button" data-action="setA11yTheme" data-val="gb" style="padding:6px 10px; border:none; background:#3b2716; color:#a9e44d; cursor:pointer; font-weight:bold;">Ц</button>
+      </div>
+      <span id="a11y-theme-label" style="font-size:11px; color:#555;">Ч/Б</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:6px; align-items:center;">
+      <span style="font-size:12px; font-weight:600;">Изображения</span>
+      <div style="display:flex; border:1px solid #0c1630; background:#fff; border-radius:4px; overflow:hidden;">
+        <button type="button" data-action="setA11yImg" data-val="off" style="padding:6px 12px; border:none; border-right:1px solid #0c1630; background:transparent; cursor:pointer;">Выкл</button>
+        <button type="button" data-action="setA11yImg" data-val="bw" style="padding:6px 12px; border:none; border-right:1px solid #0c1630; background:transparent; cursor:pointer;">Ч/Б</button>
+        <button type="button" data-action="setA11yImg" data-val="color" style="padding:6px 12px; border:none; background:transparent; cursor:pointer;">Цвет</button>
+      </div>
+      <span id="a11y-img-label" style="font-size:11px; color:#555;">Цветные</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:6px; align-items:center;">
+      <span style="font-size:12px; font-weight:600;">Панель</span>
+      <div style="display:flex; border:1px solid #0c1630; background:#fff; border-radius:4px; overflow:hidden;">
+        <button type="button" data-action="resetA11y" style="padding:6px 12px; border:none; border-right:1px solid #0c1630; background:transparent; cursor:pointer;">🔄</button>
+        <button type="button" data-action="disableA11y" style="padding:6px 12px; border:none; background:transparent; cursor:pointer;">Выкл</button>
+      </div>
+      <span style="font-size:11px; color:#555;">&nbsp;</span>
+    </div>
+  </div>
+</div>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf4; transition: filter 0.3s ease; }
+  
+  /* Dropdown styles */
+  .nav-menu { display: flex; gap: 30px; font-size: 14.5px; font-weight: 500; color: #c4d0ea; list-style: none; margin: 0; padding: 0; position: relative; z-index: 100; align-items: center; }
+  .nav-item { position: relative; cursor: pointer; padding: 10px 0; transition: color 0.2s; }
+  .nav-item:hover, .nav-item.active { color: #fff; }
+  .nav-item::after { content: '▾'; font-size: 10px; margin-left: 6px; opacity: 0.7; }
+  .nav-item.no-drop::after { display: none; }
+  
+  .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px); background: #ffffff; color: #0c1630; min-width: 260px; border-radius: 14px; box-shadow: 0 14px 40px rgba(0,0,0,0.25); padding: 12px 0; opacity: 0; visibility: hidden; transition: all 0.2s ease; z-index: 100; border: 1px solid rgba(255,255,255,0.1); }
+  .nav-item:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+  
+  .dropdown-item { display: block; padding: 5px 24px; font-size: 14px; color: #5b687f; text-decoration: none; transition: all 0.15s; white-space: normal; max-width: 320px; line-height: 1.4; border-bottom: 1px solid #dde4f0; }
+  .dropdown-item:last-child { border-bottom: none; }
+  .dropdown-item:hover { background: #f4f6fb; color: #4f7cff; padding: 5px 20px 5px 28px; text-shadow: 0 0 .5px #4f7cff; }
+  
+  /* Mega menu for 'Ещё' */
+  .mega-menu { width: 680px; left: 50%; transform: translateX(-60%) translateY(10px); display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 24px; }
+  .nav-item:hover .mega-menu { transform: translateX(-60%) translateY(0); }
+  .mega-column { display: flex; flex-direction: column; gap: 4px; }
+  .mega-title { font-size: 11px; font-weight: 700; color: #8a9ac4; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; padding-left: 12px; }
+  .mega-item { display: block; padding: 3px 12px; font-size: 13.5px; color: #5b687f; text-decoration: none; border-radius: 8px; transition: all 0.15s; white-space: normal; line-height: 1.4; }
+  .mega-item:hover { background: #f4f6fb; color: #4f7cff; text-shadow: 0 0 .5px #4f7cff; transform: translateX(4px); }
+
+  /* Accessibility mode button */
+  .a11y-btn { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15); padding: 11px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+  .a11y-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); }
+
+  /* Accessibility mode styles (Global Override) */
+  body.a11y-active * { transition: none !important; }
+  body.a11y-active [style*="background:#0c1630"], body.a11y-active [style*="background:#111d3c"], body.a11y-active [style*="linear-gradient"] { border: 2px solid currentColor !important; background: none !important; }
+  body.a11y-active .dropdown-menu { box-shadow: none; }
+  body.a11y-active [style*="border-radius"] { border-radius: 0 !important; }
+
+  /* Fonts */
+  body.a11y-font-arial * { font-family: Arial, sans-serif !important; }
+  body.a11y-font-times * { font-family: "Times New Roman", Times, serif !important; }
+  body.a11y-font-courier * { font-family: "Courier New", Courier, monospace !important; }
+
+  /* Sizes */
+  body.a11y-size-normal { font-size: 100% !important; }
+  body.a11y-size-large { font-size: 130% !important; }
+  body.a11y-size-large h1, body.a11y-size-large h2, body.a11y-size-large h3, body.a11y-size-large .nav-item { font-size: 130% !important; }
+  body.a11y-size-large .dropdown-item, body.a11y-size-large .mega-item { font-size: 18px !important; }
+
+  /* Kerning */
+  body.a11y-kerning-normal * { letter-spacing: normal !important; }
+  body.a11y-kerning-medium * { letter-spacing: 2px !important; }
+  body.a11y-kerning-large * { letter-spacing: 4px !important; }
+
+  /* Spacing */
+  body.a11y-spacing-normal * { line-height: 1.3 !important; }
+  body.a11y-spacing-medium * { line-height: 1.6 !important; }
+  body.a11y-spacing-large * { line-height: 2.0 !important; }
+
+  /* Images */
+  body.a11y-img-off img, body.a11y-img-off svg, body.a11y-img-off [style*="background:url"], body.a11y-img-off [style*="repeating-linear-gradient"] { opacity: 0 !important; visibility: hidden !important; }
+  body.a11y-img-bw { filter: grayscale(100%); }
+
+  /* Base Theme variables mapping */
+  body.a11y-active { --a11y-bg: #fff; --a11y-fg: #000; }
+  body.a11y-theme-bw { --a11y-bg: #fff; --a11y-fg: #000; }
+  body.a11y-theme-wb { --a11y-bg: #000; --a11y-fg: #fff; }
+  body.a11y-theme-yb { --a11y-bg: #000; --a11y-fg: #ff0; }
+  body.a11y-theme-blue { --a11y-bg: #9dd1ff; --a11y-fg: #063462; }
+  body.a11y-theme-gb { --a11y-bg: #3b2716; --a11y-fg: #a9e44d; }
+
+  /* Universal Theme Applier */
+  body.a11y-active, body.a11y-active div:not(#a11y-panel):not(#a11y-panel div), body.a11y-active header, body.a11y-active footer, body.a11y-active nav { background: var(--a11y-bg) !important; color: var(--a11y-fg) !important; border-color: var(--a11y-fg) !important; }
+  body.a11y-active [style*="color"], body.a11y-active h1, body.a11y-active h2, body.a11y-active h3, body.a11y-active h4, body.a11y-active p, body.a11y-active span, body.a11y-active a, body.a11y-active li { color: var(--a11y-fg) !important; }
+  body.a11y-active .dropdown-menu { border: 3px solid var(--a11y-fg) !important; background: var(--a11y-bg) !important; }
+  body.a11y-active .nav-menu { color: var(--a11y-fg) !important; }
+  body.a11y-active .dropdown-item:hover, body.a11y-active .mega-item:hover { background: var(--a11y-fg) !important; color: var(--a11y-bg) !important; }
+  body.a11y-active .a11y-btn { background: var(--a11y-bg) !important; color: var(--a11y-fg) !important; border: 2px solid var(--a11y-fg) !important; }
+  body.a11y-active .mega-title { color: var(--a11y-fg) !important; text-decoration: underline; }
+</style>
+</helmet>
+
+<div data-screen-label="Главная" style="width:100%; background:#ffffff; overflow:clip; font-family:'Golos Text',system-ui,sans-serif; color:#0f1830;">
+
+    <!-- sticky nav -->
+    <div style="position:sticky; top:0; z-index:1000; background:rgba(12,22,48,0.95); backdrop-filter:blur(10px); padding:20px max(56px, calc(50vw - 640px)); border-bottom:1px solid rgba(255,255,255,0.05);">
+      <!-- nav -->
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <a href="#" style="text-decoration:none; display:flex; align-items:center; gap:13px;">
+          <div style="width:46px; height:46px; border-radius:11px; background:linear-gradient(135deg,#4f7cff,#2f5bd8); display:flex; align-items:center; justify-content:center; color:#fff; font:800 17px/1 'Onest',sans-serif;">Б</div>
+          <div style="color:#fff; font:700 15px/1.25 'Onest',sans-serif;">БПК <span style="color:#8fa6d8; font-weight:500;">им. В. В. Бурцева</span></div>
+        </a>
+        
+        <ul class="nav-menu">
+          <li class="nav-item">Сведения об образовательной организации
+            <div class="dropdown-menu">
+              <a href="/sveden/common/" class="dropdown-item">Основные сведения</a>
+              <a href="/sveden/struct/" class="dropdown-item">Структура и органы управления образовательной организацией</a>
+              <a href="/sveden/document/" class="dropdown-item">Документы</a>
+              <a href="/sveden/education/" class="dropdown-item">Образование</a>
+              <a href="/sveden/eduStandarts/" class="dropdown-item">Образовательные стандарты и требования</a>
+              <a href="/sveden/managers/" class="dropdown-item">Руководство</a>
+              <a href="/sveden/employees/" class="dropdown-item">Педагогический состав</a>
+              <a href="/sveden/objects/" class="dropdown-item">Материально-техническое обеспечение и оснащённость образовательного процесса. Доступная среда</a>
+              <a href="/sveden/grants/" class="dropdown-item">Стипендии и меры поддержки обучающихся</a>
+              <a href="/sveden/paid_edu/" class="dropdown-item">Платные образовательные услуги</a>
+              <a href="/sveden/budget/" class="dropdown-item">Финансово-хозяйственная деятельность</a>
+              <a href="/sveden/vacant/" class="dropdown-item">Вакантные места для приёма (перевода) обучающихся</a>
+              <a href="/sveden/inter/" class="dropdown-item">Международное сотрудничество</a>
+              <a href="/sveden/catering/" class="dropdown-item">Организация питания в образовательной организации</a>
+              <a href="/sveden/law-map.php" class="dropdown-item">Законодательная карта</a>
+            </div>
+          </li>
+          <li class="nav-item">Абитуриенту
+            <div class="dropdown-menu">
+              <a href="javascript:void(0)" class="dropdown-item">Правила приема</a>
+              <a href="javascript:void(0)" class="dropdown-item">Специальности</a>
+              <a href="javascript:void(0)" class="dropdown-item">Целевое обучение</a>
+              <a href="javascript:void(0)" class="dropdown-item">Общежитие</a>
+              <a href="javascript:void(0)" class="dropdown-item">Количество поданных заявлений</a>
+            </div>
+          </li>
+          <li class="nav-item">Студентам
+            <div class="dropdown-menu">
+              <a href="javascript:void(0)" class="dropdown-item">Расписание занятий</a>
+              <a href="javascript:void(0)" class="dropdown-item">Расписание звонков</a>
+              <a href="javascript:void(0)" class="dropdown-item">Правила внутреннего распорядка</a>
+              <a href="javascript:void(0)" class="dropdown-item">Студенческое самоуправление</a>
+              <a href="javascript:void(0)" class="dropdown-item">Электронные ресурсы</a>
+            </div>
+          </li>
+          <li class="nav-item">Ещё
+            <div class="dropdown-menu mega-menu">
+              <div class="mega-column">
+                <div class="mega-title">О колледже</div>
+                <a href="javascript:void(0)" class="mega-item">История</a>
+                <a href="javascript:void(0)" class="mega-item">Отделения</a>
+                <a href="javascript:void(0)" class="mega-item">Символика</a>
+                <a href="javascript:void(0)" class="mega-item">Отзывы</a>
+                <a href="javascript:void(0)" class="mega-item">Вакансии</a>
+              </div>
+              <div class="mega-column">
+                <div class="mega-title">Карьера и практика</div>
+                <a href="javascript:void(0)" class="mega-item">Центр карьеры</a>
+                <a href="javascript:void(0)" class="mega-item">Дуальное обучение</a>
+                <a href="javascript:void(0)" class="mega-item">Трудоустройство выпускников</a>
+                <a href="javascript:void(0)" class="mega-item">Выпускникам</a>
+              </div>
+              <div class="mega-column">
+                <div class="mega-title">Дополнительно</div>
+                <a href="javascript:void(0)" class="mega-item">Преподавателям</a>
+                <a href="javascript:void(0)" class="mega-item">Пресс-центр</a>
+                <a href="javascript:void(0)" class="mega-item">Методическая работа</a>
+                <a href="javascript:void(0)" class="mega-item">Воспитательная работа</a>
+                <a href="javascript:void(0)" class="mega-item">Контакты</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div style="display:flex; gap:16px; align-items:center;">
+          <button class="a11y-btn" data-action="toggleA11yPanel">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <span style="pointer-events:none;">Для слабовидящих</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- hero (full navy) -->
+    <div style="background:#0c1630; padding:58px max(56px, calc(50vw - 640px)) 90px; position:relative;">
+      <!-- hero content -->
+      <div style="display:grid; grid-template-columns:1.15fr .85fr; gap:48px; align-items:center;">
+        <div>
+          <div style="display:inline-flex; align-items:center; gap:9px; background:rgba(79,124,255,.14); border:1px solid rgba(79,124,255,.35); padding:8px 15px; border-radius:100px; margin-bottom:28px;">
+            <span style="width:7px; height:7px; border-radius:50%; background:#4f7cff;"></span>
+            <span style="font-size:13px; font-weight:600; color:#9fb6ec;">Приём 2026 открыт · бюджетные места есть</span>
+          </div>
+          <h1 style="font:800 58px/1.06 'Onest',sans-serif; color:#fff; margin:0 0 24px; letter-spacing:-.02em;">Твоя дорога<br>в <span style="color:#4f7cff;">правоохрану</span><br>начинается здесь</h1>
+          <p style="font-size:18px; line-height:1.6; color:#aab8d8; margin:0 0 36px; max-width:480px;">Среднее профессиональное образование для будущих юристов, сотрудников полиции, МЧС и социальной сферы.</p>
+          <div style="display:flex; gap:14px; align-items:center;">
+            <div style="background:#4f7cff; color:#fff; font-weight:600; font-size:16px; padding:16px 30px; border-radius:12px;">Выбрать специальность →</div>
+            <div style="color:#fff; font-weight:600; font-size:16px; padding:16px 26px; border-radius:12px; border:1.5px solid #2a3a60;">▶ О колледже</div>
+          </div>
+        </div>
+        <div style="position:relative;">
+          <style>
+            @keyframes heroAutoScroll {
+              0%, 25% { transform: translateX(0); }
+              33%, 58% { transform: translateX(-33.333%); }
+              66%, 91% { transform: translateX(-66.666%); }
+              100% { transform: translateX(0); }
+            }
+          </style>
+          <div style="aspect-ratio:1/1.08; border-radius:20px; overflow:hidden; position:relative; box-shadow:0 24px 50px rgba(0,0,0,0.3);">
+            <div style="display:flex; width:300%; height:100%; animation: heroAutoScroll 15s infinite;">
+              <img src="images/hero_police.png" style="width:33.333%; height:100%; object-fit:cover;">
+              <img src="images/hero_cynology.png" style="width:33.333%; height:100%; object-fit:cover;">
+              <img src="images/hero_mchs.png" style="width:33.333%; height:100%; object-fit:cover;">
+            </div>
+          </div>
+          <div style="position:absolute; bottom:-26px; left:-30px; background:#fff; border-radius:16px; padding:18px 22px; box-shadow:0 18px 40px rgba(0,0,0,.3);">
+            <div style="font:800 30px/1 'Onest',sans-serif; color:#0c1630;">95%</div>
+            <div style="font-size:12.5px; color:#64708c; margin-top:4px;">находят работу<br>по специальности</div>
+          </div>
+          <div style="position:absolute; top:-18px; right:-22px; background:#4f7cff; border-radius:14px; padding:14px 18px; box-shadow:0 14px 30px rgba(79,124,255,.4);">
+            <div style="font:800 24px/1 'Onest',sans-serif; color:#fff;">320</div>
+            <div style="font-size:11.5px; color:#dbe5ff; margin-top:3px;">бюджетных мест</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- stat strip -->
+    <div style="background:#fff; margin:0 max(56px, calc(50vw - 640px)); transform:translateY(-40px); border-radius:18px; box-shadow:0 12px 40px rgba(12,22,48,.1); padding:30px 40px; display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
+      <div><div style="font:800 34px/1 'Onest',sans-serif; color:#0c1630;">6</div><div style="font-size:13.5px; color:#64708c; margin-top:6px;">специальностей</div></div>
+      <div style="border-left:1px solid #eaeef6; padding-left:24px;"><div style="font:800 34px/1 'Onest',sans-serif; color:#0c1630;">1500+</div><div style="font-size:13.5px; color:#64708c; margin-top:6px;">студентов</div></div>
+      <div style="border-left:1px solid #eaeef6; padding-left:24px;"><div style="font:800 34px/1 'Onest',sans-serif; color:#0c1630;">12</div><div style="font-size:13.5px; color:#64708c; margin-top:6px;">лабораторий и тиров</div></div>
+      <div style="border-left:1px solid #eaeef6; padding-left:24px;"><div style="font:800 34px/1 'Onest',sans-serif; color:#0c1630;">2014</div><div style="font-size:13.5px; color:#64708c; margin-top:6px;">год основания</div></div>
+    </div>
+
+    <!-- specialties -->
+    <div style="padding:34px max(56px, calc(50vw - 640px)) 70px; background:#fff;">
+      <div style="margin-bottom:30px;">
+        <div style="font-size:13px; font-weight:700; letter-spacing:.12em; color:#4f7cff; margin-bottom:10px;">СПЕЦИАЛЬНОСТИ</div>
+        <h2 style="font:800 36px/1.1 'Onest',sans-serif; color:#0c1630; margin:0; letter-spacing:-.01em;">Кем ты можешь стать</h2>
+      </div>
+      <style>
+        .specialty-card { background:#f4f6fb; border-radius:18px; padding:30px; transition:all 0.15s ease-out; cursor:pointer; }
+        .specialty-card .sp-tag { font-size:12.5px; color:#64708c; background:#fff; padding:6px 12px; border-radius:100px; transition:all 0.15s ease-out; }
+        .specialty-card h3 { font:700 22px/1.25 'Onest',sans-serif; color:#0c1630; margin:0 0 10px; transition:all 0.15s ease-out; }
+        .specialty-card p { font-size:14.5px; line-height:1.55; color:#5b687f; margin:0 0 20px; transition:all 0.15s ease-out; }
+        .specialty-card .sp-footer { display:flex; gap:16px; font-size:13px; color:#64708c; padding-top:16px; border-top:1px solid #e6ebf4; transition:all 0.15s ease-out; }
+        
+        .specialty-card:hover { background:#0c1630; transform:translateY(-6px); box-shadow:0 20px 40px rgba(12,22,48,0.2); }
+        .specialty-card:hover .sp-tag { color:#8fa6d8; background:rgba(255,255,255,.07); }
+        .specialty-card:hover h3 { color:#fff; }
+        .specialty-card:hover p { color:#aab8d8; }
+        .specialty-card:hover .sp-footer { color:#8fa6d8; border-color:#20305a; }
+      </style>
+      <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px;">
+        <div class="specialty-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <span style="font:800 32px/1 'Onest',sans-serif; color:#4f7cff;">40.02.02</span>
+            <span class="sp-tag">9 / 11 классов</span>
+          </div>
+          <h3>Правоохранительная деятельность</h3>
+          <p>Полиция · Росгвардия · ФСИН. Самое популярное направление колледжа.</p>
+          <div class="sp-footer"><span>2 г. 6 мес.</span><span>Очная</span></div>
+        </div>
+        <div class="specialty-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <span style="font:800 32px/1 'Onest',sans-serif; color:#4f7cff;">36.02.05</span>
+            <span class="sp-tag">9 / 11 классов</span>
+          </div>
+          <h3>Кинология</h3>
+          <p>Подготовка служебных собак для силовых структур, таможни и спасательных служб.</p>
+          <div class="sp-footer"><span>3 г. 6 мес.</span><span>Очная</span></div>
+        </div>
+        <div class="specialty-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <span style="font:800 32px/1 'Onest',sans-serif; color:#4f7cff;">20.02.02</span>
+            <span class="sp-tag">9 / 11 классов</span>
+          </div>
+          <h3>Защита в чрезвычайных ситуациях</h3>
+          <p>Организация и проведение аварийно-спасательных работ. Профессия спасателя МЧС.</p>
+          <div class="sp-footer"><span>2 г. 10 мес.</span><span>Очная</span></div>
+        </div>
+        <div class="specialty-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <span style="font:800 32px/1 'Onest',sans-serif; color:#4f7cff;">20.02.04</span>
+            <span class="sp-tag">9 / 11 классов</span>
+          </div>
+          <h3>Пожарная безопасность</h3>
+          <p>Будущие спасатели и инспекторы МЧС. Практика на учебном полигоне.</p>
+          <div class="sp-footer"><span>2 г. 10 мес.</span><span>Очная</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- admission -->
+    <div style="padding:64px max(56px, calc(50vw - 640px)); background:#0c1630;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px;">
+        <h2 style="font:800 36px/1.1 'Onest',sans-serif; color:#fff; margin:0; letter-spacing:-.01em;">Поступить просто</h2>
+        <span style="font-size:14.5px; color:#8fa6d8;">4 шага до студенческого билета</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
+        <div style="background:#111d3c; border-radius:16px; padding:26px;"><div style="width:42px; height:42px; border-radius:11px; background:#4f7cff; display:flex; align-items:center; justify-content:center; font:800 18px/1 'Onest',sans-serif; color:#fff; margin-bottom:18px;">1</div><div style="color:#fff; font-weight:700; font-size:16px; margin-bottom:8px;">Заявление</div><div style="font-size:13.5px; line-height:1.5; color:#9fb0d4;">Онлайн за 10 минут или лично в приёмной комиссии.</div></div>
+        <div style="background:#111d3c; border-radius:16px; padding:26px;"><div style="width:42px; height:42px; border-radius:11px; background:#1e2f57; display:flex; align-items:center; justify-content:center; font:800 18px/1 'Onest',sans-serif; color:#4f7cff; margin-bottom:18px;">2</div><div style="color:#fff; font-weight:700; font-size:16px; margin-bottom:8px;">Документы</div><div style="font-size:13.5px; line-height:1.5; color:#9fb0d4;">Аттестат, паспорт, фото и медсправка 086/у.</div></div>
+        <div style="background:#111d3c; border-radius:16px; padding:26px;"><div style="width:42px; height:42px; border-radius:11px; background:#1e2f57; display:flex; align-items:center; justify-content:center; font:800 18px/1 'Onest',sans-serif; color:#4f7cff; margin-bottom:18px;">3</div><div style="color:#fff; font-weight:700; font-size:16px; margin-bottom:8px;">Конкурс</div><div style="font-size:13.5px; line-height:1.5; color:#9fb0d4;">Зачисление по среднему баллу аттестата.</div></div>
+        <div style="background:#111d3c; border-radius:16px; padding:26px;"><div style="width:42px; height:42px; border-radius:11px; background:#1e2f57; display:flex; align-items:center; justify-content:center; font:800 18px/1 'Onest',sans-serif; color:#4f7cff; margin-bottom:18px;">4</div><div style="color:#fff; font-weight:700; font-size:16px; margin-bottom:8px;">Зачисление</div><div style="font-size:13.5px; line-height:1.5; color:#9fb0d4;">Приказ — и ты студент колледжа!</div></div>
+      </div>
+    </div>
+
+    <!-- student life image grid -->
+    <div style="padding:64px max(56px, calc(50vw - 640px)); background:#fff;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:center;">
+        <div>
+          <div style="font-size:13px; font-weight:700; letter-spacing:.12em; color:#4f7cff; margin-bottom:12px;">СТУДЕНЧЕСКАЯ ЖИЗНЬ</div>
+          <h2 style="font:800 34px/1.12 'Onest',sans-serif; color:#0c1630; margin:0 0 16px; letter-spacing:-.01em;">Не только учёба</h2>
+          <p style="font-size:16px; line-height:1.65; color:#5b687f; margin:0 0 26px;">Военно‑патриотические клубы, спорт, волонтёрство, юнармия и стажировки в действующих подразделениях. Колледж имени Героя России воспитывает характер.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <span style="background:#f4f6fb; color:#0c1630; font-size:13.5px; font-weight:600; padding:9px 16px; border-radius:100px;">Юнармия</span>
+            <span style="background:#f4f6fb; color:#0c1630; font-size:13.5px; font-weight:600; padding:9px 16px; border-radius:100px;">Стрелковый клуб</span>
+            <span style="background:#f4f6fb; color:#0c1630; font-size:13.5px; font-weight:600; padding:9px 16px; border-radius:100px;">Волонтёрство</span>
+            <span style="background:#f4f6fb; color:#0c1630; font-size:13.5px; font-weight:600; padding:9px 16px; border-radius:100px;">Спартакиада</span>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:12px; aspect-ratio:1/.82;">
+          <div style="border-radius:14px; background:url('images/life_tactical.png') center/cover no-repeat; grid-row:span 2; box-shadow:0 8px 24px rgba(12,22,48,0.08);"></div>
+          <div style="border-radius:14px; background:url('images/life_volunteer.png') center/cover no-repeat; box-shadow:0 8px 24px rgba(12,22,48,0.08);"></div>
+          <div style="border-radius:14px; background:url('images/life_sports.png') center/cover no-repeat; box-shadow:0 8px 24px rgba(12,22,48,0.08);"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- news -->
+    <div style="padding:0 max(56px, calc(50vw - 640px)) 70px; background:#fff;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:28px;">
+        <h2 style="font:800 32px/1.1 'Onest',sans-serif; color:#0c1630; margin:0; letter-spacing:-.01em;">Новости колледжа</h2>
+        <span style="font-size:14.5px; font-weight:600; color:#4f7cff;">Все новости →</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px;">
+        <div><div style="aspect-ratio:16/10; border-radius:16px; background:url('images/news_openday.png') center/cover no-repeat; margin-bottom:16px; box-shadow:0 8px 24px rgba(12,22,48,0.06);"></div><div style="font-size:12.5px; color:#4f7cff; font-weight:600; margin-bottom:8px;">12 июня 2026</div><div style="font:700 17px/1.3 'Onest',sans-serif; color:#0c1630;">День открытых дверей для абитуриентов</div></div>
+        <div><div style="aspect-ratio:16/10; border-radius:16px; background:url('images/news_spartakiada.png') center/cover no-repeat; margin-bottom:16px; box-shadow:0 8px 24px rgba(12,22,48,0.06);"></div><div style="font-size:12.5px; color:#4f7cff; font-weight:600; margin-bottom:8px;">3 июня 2026</div><div style="font:700 17px/1.3 'Onest',sans-serif; color:#0c1630;">Призёры региональной Спартакиады‑2026</div></div>
+        <div><div style="aspect-ratio:16/10; border-radius:16px; background:url('images/news_fire.png') center/cover no-repeat; margin-bottom:16px; box-shadow:0 8px 24px rgba(12,22,48,0.06);"></div><div style="font-size:12.5px; color:#4f7cff; font-weight:600; margin-bottom:8px;">28 мая 2026</div><div style="font:700 17px/1.3 'Onest',sans-serif; color:#0c1630;">Новый набор: «Пожарная безопасность»</div></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="margin:0 max(56px, calc(50vw - 640px)) 64px; background:linear-gradient(120deg,#4f7cff,#2f5bd8); border-radius:24px; padding:54px 48px; display:flex; justify-content:space-between; align-items:center; gap:32px;">
+      <div>
+        <h2 style="font:800 34px/1.15 'Onest',sans-serif; color:#fff; margin:0 0 10px; letter-spacing:-.01em;">Подай заявление сегодня</h2>
+        <p style="font-size:16px; color:#dbe5ff; margin:0;">Бюджетные места ограничены. Не откладывай поступление.</p>
+      </div>
+      <div style="background:#fff; color:#2f5bd8; font-weight:700; font-size:16px; padding:17px 32px; border-radius:14px; flex-shrink:0;">Подать заявление →</div>
+    </div>
+
+    <!-- footer -->
+    <div style="background:#0c1630; color:#9fb0d4; padding:50px max(56px, calc(50vw - 640px)) 28px;">
+      <div style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1.1fr; gap:36px; padding-bottom:34px; border-bottom:1px solid #1c2c4a;">
+        <div>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><div style="width:42px; height:42px; border-radius:11px; background:linear-gradient(135deg,#4f7cff,#2f5bd8); display:flex; align-items:center; justify-content:center; color:#fff; font:800 17px/1 'Onest',sans-serif;">Б</div><div style="color:#fff; font:700 14px/1.3 'Onest',sans-serif;">БПК им. В. В. Бурцева</div></div>
+          <p style="font-size:13px; line-height:1.6; margin:0;">Областное государственное автономное профессиональное образовательное учреждение. г. Белгород.</p>
+        </div>
+        <div><div style="color:#fff; font-weight:700; font-size:14px; margin-bottom:14px;">Абитуриентам</div><div style="display:flex; flex-direction:column; gap:10px; font-size:13.5px;"><span>Специальности</span><span>Правила приёма</span><span>Документы</span><span>Стоимость</span></div></div>
+        <div><div style="color:#fff; font-weight:700; font-size:14px; margin-bottom:14px;">Колледж</div><div style="display:flex; flex-direction:column; gap:10px; font-size:13.5px;"><span>О колледже</span><span>Руководство</span><span>Сведения об ОО</span><span>Контакты</span></div></div>
+        <div><div style="color:#fff; font-weight:700; font-size:14px; margin-bottom:14px;">Контакты</div><div style="display:flex; flex-direction:column; gap:10px; font-size:13.5px;"><span>г. Белгород, ул. Будённого, 1</span><span style="color:#7fa0ff;">+7 (4722) 00‑00‑00</span><span>info@collegelaw.ru</span></div></div>
+      </div>
+      <div style="display:flex; justify-content:space-between; padding-top:20px; font-size:12.5px; color:#5d6a86;"><span>© 2026 БПК им. В. В. Бурцева</span><span>Политика конфиденциальности · Карта сайта</span></div>
+    </div>
+
+</div>
+</x-dc>
+
+<script>
+const labels = {
+  font: { 'arial': 'Без засечек', 'times': 'С засечками', 'courier': 'Моноширинный' },
+  size: { 'normal': 'Обычный', 'large': 'Увеличенный' },
+  kerning: { 'normal': 'Стандартный', 'medium': 'Средний', 'large': 'Большой' },
+  spacing: { 'normal': 'Одинарный', 'medium': 'Полуторный', 'large': 'Двойной' },
+  theme: { 'bw': 'Чёрным по белому', 'wb': 'Белым по чёрному', 'yb': 'Желтым по чёрному', 'blue': 'Синим по голубому', 'gb': 'Зеленым по коричневому' },
+  img: { 'color': 'Цветные', 'bw': 'Чёрно-белые', 'off': 'Выключены' }
+};
+
+function updateLabel(type, val) {
+  const el = document.getElementById('a11y-' + type + '-label');
+  if(el && labels[type] && labels[type][val]) el.textContent = labels[type][val];
+}
+
+function setA11yState(type, val) {
+  document.body.className = document.body.className.replace(new RegExp('\\ba11y-' + type + '-[^ ]+', 'g'), '').trim();
+  document.body.classList.add('a11y-' + type + '-' + val);
+  updateLabel(type, val);
+}
+
+function initA11y() {
+  document.body.classList.add('a11y-active');
+  setA11yState('font', 'arial');
+  setA11yState('size', 'normal');
+  setA11yState('kerning', 'normal');
+  setA11yState('spacing', 'normal');
+  setA11yState('theme', 'bw');
+  setA11yState('img', 'color');
+}
+
+document.addEventListener('click', function(e) {
+  const target = e.target.closest('[data-action]');
+  if (!target) return;
+  
+  const action = target.getAttribute('data-action');
+  const val = target.getAttribute('data-val');
+  
+  if (action === 'toggleA11yPanel') {
+    const panel = document.getElementById('a11y-panel');
+    if (panel.style.display === 'none') {
+      panel.style.display = 'block';
+      if (!document.body.classList.contains('a11y-active')) initA11y();
+    } else {
+      panel.style.display = 'none';
+    }
+  } else if (action === 'setA11yFont') setA11yState('font', val);
+  else if (action === 'setA11ySize') setA11yState('size', val);
+  else if (action === 'setA11yKerning') setA11yState('kerning', val);
+  else if (action === 'setA11ySpacing') setA11yState('spacing', val);
+  else if (action === 'setA11yTheme') setA11yState('theme', val);
+  else if (action === 'setA11yImg') setA11yState('img', val);
+  else if (action === 'resetA11y') initA11y();
+  else if (action === 'disableA11y') {
+    document.body.className = '';
+    document.getElementById('a11y-panel').style.display = 'none';
+  }
+});
+</script>
+
+</body>
+</html>
