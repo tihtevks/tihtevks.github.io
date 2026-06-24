@@ -162,6 +162,37 @@
   body.a11y-active .dropdown-item:hover, body.a11y-active .mega-item:hover { background: var(--a11y-fg) !important; color: var(--a11y-bg) !important; }
   body.a11y-active .a11y-btn { background: var(--a11y-bg) !important; color: var(--a11y-fg) !important; border: 2px solid var(--a11y-fg) !important; }
   body.a11y-active .mega-title { color: var(--a11y-fg) !important; text-decoration: underline; }
+
+  /* Mobile Adaptation */
+  @media (max-width: 768px) {
+    .section-pad { padding-left: 20px !important; padding-right: 20px !important; }
+    .section-pad-x { padding-left: 20px !important; padding-right: 20px !important; margin-left: 0 !important; margin-right: 0 !important; }
+    .nav-menu { display: none !important; }
+    .mobile-menu-btn { display: flex !important; }
+    .a11y-text { display: none; }
+    .hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .hero-title { font-size: 38px !important; line-height: 1.1 !important; margin-bottom: 16px !important; }
+    .hero-text { font-size: 16px !important; max-width: 100% !important; margin-bottom: 24px !important; }
+    .hero-btns { flex-direction: column; width: 100%; align-items: stretch !important; gap: 12px !important; }
+    .hero-btns > div { width: 100%; text-align: center; }
+    .stat-strip { grid-template-columns: repeat(2, 1fr) !important; gap: 24px 16px !important; padding: 24px !important; transform: translateY(-20px) !important; }
+    .stat-col { border-left: none !important; padding-left: 0 !important; }
+    .spec-grid { grid-template-columns: 1fr !important; }
+    .section-title { font-size: 28px !important; line-height: 1.15 !important; }
+    .adm-grid { grid-template-columns: 1fr !important; }
+    .life-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+    .life-photos { aspect-ratio: 1/1 !important; }
+    .news-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+    .cta-block { flex-direction: column !important; text-align: center !important; padding: 32px 24px !important; gap: 20px !important; margin-bottom: 40px !important; }
+    .footer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .footer-bottom { flex-direction: column !important; gap: 12px !important; text-align: center !important; }
+  }
+
+  .mobile-menu-btn { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; color: #fff; cursor: pointer; }
+  .mobile-nav-panel { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #0c1630; padding: 20px; flex-direction: column; border-bottom: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+  .mobile-nav-panel.open { display: flex; }
+  .mobile-nav-link { color: #fff; font-size: 16px; font-weight: 600; text-decoration: none; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .mobile-nav-link:last-child { border-bottom: none; }
 </style>
 </helmet>
 
@@ -243,26 +274,36 @@
           </li>
         </ul>
 
-        <div style="display:flex; gap:16px; align-items:center;">
+        <div style="display:flex; gap:12px; align-items:center;">
           <button class="a11y-btn" data-action="toggleA11yPanel">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-            <span style="pointer-events:none;">Для слабовидящих</span>
+            <span style="pointer-events:none;" class="a11y-text">Для слабовидящих</span>
+          </button>
+          <button class="mobile-menu-btn" onclick="document.getElementById('mobileNav').classList.toggle('open')">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
           </button>
         </div>
       </div>
+      <!-- Mobile Nav Panel -->
+      <div id="mobileNav" class="mobile-nav-panel">
+        <a href="#" class="mobile-nav-link">Сведения об образовательной организации</a>
+        <a href="#" class="mobile-nav-link">Абитуриенту</a>
+        <a href="#" class="mobile-nav-link">Студентам</a>
+        <a href="#" class="mobile-nav-link">О колледже</a>
+      </div>
     </div>
     <!-- hero (full navy) -->
-    <div style="background:#0c1630; padding:58px max(56px, calc(50vw - 640px)) 90px; position:relative;">
+    <div class="section-pad" style="background:#0c1630; padding:58px max(56px, calc(50vw - 640px)) 90px; position:relative;">
       <!-- hero content -->
-      <div style="display:grid; grid-template-columns:1.15fr .85fr; gap:48px; align-items:center;">
+      <div class="hero-grid" style="display:grid; grid-template-columns:1.15fr .85fr; gap:48px; align-items:center;">
         <div>
           <div style="display:inline-flex; align-items:center; gap:9px; background:rgba(79,124,255,.14); border:1px solid rgba(79,124,255,.35); padding:8px 15px; border-radius:100px; margin-bottom:28px;">
             <span style="width:7px; height:7px; border-radius:50%; background:#4f7cff;"></span>
             <span style="font-size:13px; font-weight:600; color:#9fb6ec;">Приём 2026 открыт · бюджетные места есть</span>
           </div>
-          <h1 style="font:800 58px/1.06 'Onest',sans-serif; color:#fff; margin:0 0 24px; letter-spacing:-.02em;">Твоя дорога<br>в <span style="color:#4f7cff;">правоохрану</span><br>начинается здесь</h1>
-          <p style="font-size:18px; line-height:1.6; color:#aab8d8; margin:0 0 36px; max-width:480px;">Среднее профессиональное образование для будущих юристов, сотрудников полиции, МЧС и социальной сферы.</p>
-          <div style="display:flex; gap:14px; align-items:center;">
+          <h1 class="hero-title" style="font:800 58px/1.06 'Onest',sans-serif; color:#fff; margin:0 0 24px; letter-spacing:-.02em;">Твоя дорога<br>в <span style="color:#4f7cff;">правоохрану</span><br>начинается здесь</h1>
+          <p class="hero-text" style="font-size:18px; line-height:1.6; color:#aab8d8; margin:0 0 36px; max-width:480px;">Среднее профессиональное образование для будущих юристов, сотрудников полиции, МЧС и социальной сферы.</p>
+          <div class="hero-btns" style="display:flex; gap:14px; align-items:center;">
             <div style="background:#4f7cff; color:#fff; font-weight:600; font-size:16px; padding:16px 30px; border-radius:12px;">Выбрать специальность →</div>
             <div style="color:#fff; font-weight:600; font-size:16px; padding:16px 26px; border-radius:12px; border:1.5px solid #2a3a60;">▶ О колледже</div>
           </div>
@@ -296,18 +337,18 @@
     </div>
 
     <!-- stat strip -->
-    <div style="background:#fff; margin:0 max(56px, calc(50vw - 640px)); transform:translateY(-40px); border-radius:18px; box-shadow:0 12px 40px rgba(12,22,48,.1); padding:30px 40px; display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
-      <div><div style="font:800 34px/1 'Onest',sans-serif; color:#0c1630;">6</div><div style="font-size:13.5px; color:#64708c; margin-top:6px;">специальностей</div></div>
-      <div style="border-left:1px solid #eaeef6; padding-left:24px;"><div style="font:800 34px/1 'Onest',sans-serif; color:#0c1630;">1500+</div><div style="font-size:13.5px; color:#64708c; margin-top:6px;">студентов</div></div>
-      <div style="border-left:1px solid #eaeef6; padding-left:24px;"><div style="font:800 34px/1 'Onest',sans-serif; color:#0c1630;">12</div><div style="font-size:13.5px; color:#64708c; margin-top:6px;">лабораторий и тиров</div></div>
-      <div style="border-left:1px solid #eaeef6; padding-left:24px;"><div style="font:800 34px/1 'Onest',sans-serif; color:#0c1630;">2014</div><div style="font-size:13.5px; color:#64708c; margin-top:6px;">год основания</div></div>
+    <div class="stat-strip section-pad-x" style="background:#fff; margin:0 max(56px, calc(50vw - 640px)); transform:translateY(-40px); border-radius:18px; box-shadow:0 12px 40px rgba(12,22,48,.1); padding:30px 40px; display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
+      <div class="stat-col"><div style="font:800 34px/1 'Onest',sans-serif; color:#0c1630;">6</div><div style="font-size:13.5px; color:#64708c; margin-top:6px;">специальностей</div></div>
+      <div class="stat-col" style="border-left:1px solid #eaeef6; padding-left:24px;"><div style="font:800 34px/1 'Onest',sans-serif; color:#0c1630;">1500+</div><div style="font-size:13.5px; color:#64708c; margin-top:6px;">студентов</div></div>
+      <div class="stat-col" style="border-left:1px solid #eaeef6; padding-left:24px;"><div style="font:800 34px/1 'Onest',sans-serif; color:#0c1630;">12</div><div style="font-size:13.5px; color:#64708c; margin-top:6px;">лабораторий и тиров</div></div>
+      <div class="stat-col" style="border-left:1px solid #eaeef6; padding-left:24px;"><div style="font:800 34px/1 'Onest',sans-serif; color:#0c1630;">2014</div><div style="font-size:13.5px; color:#64708c; margin-top:6px;">год основания</div></div>
     </div>
 
     <!-- specialties -->
-    <div style="padding:34px max(56px, calc(50vw - 640px)) 70px; background:#fff;">
+    <div class="section-pad" style="padding:34px max(56px, calc(50vw - 640px)) 70px; background:#fff;">
       <div style="margin-bottom:30px;">
         <div style="font-size:13px; font-weight:700; letter-spacing:.12em; color:#4f7cff; margin-bottom:10px;">СПЕЦИАЛЬНОСТИ</div>
-        <h2 style="font:800 36px/1.1 'Onest',sans-serif; color:#0c1630; margin:0; letter-spacing:-.01em;">Кем ты можешь стать</h2>
+        <h2 class="section-title" style="font:800 36px/1.1 'Onest',sans-serif; color:#0c1630; margin:0; letter-spacing:-.01em;">Кем ты можешь стать</h2>
       </div>
       <style>
         .specialty-card { background:#f4f6fb; border-radius:18px; padding:30px; transition:all 0.15s ease-out; cursor:pointer; }
@@ -322,7 +363,7 @@
         .specialty-card:hover p { color:#aab8d8; }
         .specialty-card:hover .sp-footer { color:#8fa6d8; border-color:#20305a; }
       </style>
-      <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px;">
+      <div class="spec-grid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px;">
         <div class="specialty-card">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
             <span style="font:800 32px/1 'Onest',sans-serif; color:#4f7cff;">40.02.02</span>
@@ -363,12 +404,12 @@
     </div>
 
     <!-- admission -->
-    <div style="padding:64px max(56px, calc(50vw - 640px)); background:#0c1630;">
+    <div class="section-pad" style="padding:64px max(56px, calc(50vw - 640px)); background:#0c1630;">
       <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px;">
-        <h2 style="font:800 36px/1.1 'Onest',sans-serif; color:#fff; margin:0; letter-spacing:-.01em;">Поступить просто</h2>
+        <h2 class="section-title" style="font:800 36px/1.1 'Onest',sans-serif; color:#fff; margin:0; letter-spacing:-.01em;">Поступить просто</h2>
         <span style="font-size:14.5px; color:#8fa6d8;">4 шага до студенческого билета</span>
       </div>
-      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
+      <div class="adm-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
         <div style="background:#111d3c; border-radius:16px; padding:26px;"><div style="width:42px; height:42px; border-radius:11px; background:#4f7cff; display:flex; align-items:center; justify-content:center; font:800 18px/1 'Onest',sans-serif; color:#fff; margin-bottom:18px;">1</div><div style="color:#fff; font-weight:700; font-size:16px; margin-bottom:8px;">Заявление</div><div style="font-size:13.5px; line-height:1.5; color:#9fb0d4;">Онлайн за 10 минут или лично в приёмной комиссии.</div></div>
         <div style="background:#111d3c; border-radius:16px; padding:26px;"><div style="width:42px; height:42px; border-radius:11px; background:#1e2f57; display:flex; align-items:center; justify-content:center; font:800 18px/1 'Onest',sans-serif; color:#4f7cff; margin-bottom:18px;">2</div><div style="color:#fff; font-weight:700; font-size:16px; margin-bottom:8px;">Документы</div><div style="font-size:13.5px; line-height:1.5; color:#9fb0d4;">Аттестат, паспорт, фото и медсправка 086/у.</div></div>
         <div style="background:#111d3c; border-radius:16px; padding:26px;"><div style="width:42px; height:42px; border-radius:11px; background:#1e2f57; display:flex; align-items:center; justify-content:center; font:800 18px/1 'Onest',sans-serif; color:#4f7cff; margin-bottom:18px;">3</div><div style="color:#fff; font-weight:700; font-size:16px; margin-bottom:8px;">Конкурс</div><div style="font-size:13.5px; line-height:1.5; color:#9fb0d4;">Зачисление по среднему баллу аттестата.</div></div>
@@ -377,11 +418,11 @@
     </div>
 
     <!-- student life image grid -->
-    <div style="padding:64px max(56px, calc(50vw - 640px)); background:#fff;">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:center;">
+    <div class="section-pad" style="padding:64px max(56px, calc(50vw - 640px)); background:#fff;">
+      <div class="life-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:center;">
         <div>
           <div style="font-size:13px; font-weight:700; letter-spacing:.12em; color:#4f7cff; margin-bottom:12px;">СТУДЕНЧЕСКАЯ ЖИЗНЬ</div>
-          <h2 style="font:800 34px/1.12 'Onest',sans-serif; color:#0c1630; margin:0 0 16px; letter-spacing:-.01em;">Не только учёба</h2>
+          <h2 class="section-title" style="font:800 34px/1.12 'Onest',sans-serif; color:#0c1630; margin:0 0 16px; letter-spacing:-.01em;">Не только учёба</h2>
           <p style="font-size:16px; line-height:1.65; color:#5b687f; margin:0 0 26px;">Военно‑патриотические клубы, спорт, волонтёрство, юнармия и стажировки в действующих подразделениях. Колледж имени Героя России воспитывает характер.</p>
           <div style="display:flex; gap:12px; flex-wrap:wrap;">
             <span style="background:#f4f6fb; color:#0c1630; font-size:13.5px; font-weight:600; padding:9px 16px; border-radius:100px;">Юнармия</span>
@@ -390,7 +431,7 @@
             <span style="background:#f4f6fb; color:#0c1630; font-size:13.5px; font-weight:600; padding:9px 16px; border-radius:100px;">Спартакиада</span>
           </div>
         </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:12px; aspect-ratio:1/.82;">
+        <div class="life-photos" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:12px; aspect-ratio:1/.82;">
           <div style="border-radius:14px; background:url('images/life_tactical.png') center/cover no-repeat; grid-row:span 2; box-shadow:0 8px 24px rgba(12,22,48,0.08);"></div>
           <div style="border-radius:14px; background:url('images/life_volunteer.png') center/cover no-repeat; box-shadow:0 8px 24px rgba(12,22,48,0.08);"></div>
           <div style="border-radius:14px; background:url('images/life_sports.png') center/cover no-repeat; box-shadow:0 8px 24px rgba(12,22,48,0.08);"></div>
@@ -399,12 +440,12 @@
     </div>
 
     <!-- news -->
-    <div style="padding:0 max(56px, calc(50vw - 640px)) 70px; background:#fff;">
+    <div class="section-pad" style="padding:0 max(56px, calc(50vw - 640px)) 70px; background:#fff;">
       <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:28px;">
-        <h2 style="font:800 32px/1.1 'Onest',sans-serif; color:#0c1630; margin:0; letter-spacing:-.01em;">Новости колледжа</h2>
+        <h2 class="section-title" style="font:800 32px/1.1 'Onest',sans-serif; color:#0c1630; margin:0; letter-spacing:-.01em;">Новости колледжа</h2>
         <span style="font-size:14.5px; font-weight:600; color:#4f7cff;">Все новости →</span>
       </div>
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px;">
+      <div class="news-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px;">
         <div><div style="aspect-ratio:16/10; border-radius:16px; background:url('images/news_openday.png') center/cover no-repeat; margin-bottom:16px; box-shadow:0 8px 24px rgba(12,22,48,0.06);"></div><div style="font-size:12.5px; color:#4f7cff; font-weight:600; margin-bottom:8px;">12 июня 2026</div><div style="font:700 17px/1.3 'Onest',sans-serif; color:#0c1630;">День открытых дверей для абитуриентов</div></div>
         <div><div style="aspect-ratio:16/10; border-radius:16px; background:url('images/news_spartakiada.png') center/cover no-repeat; margin-bottom:16px; box-shadow:0 8px 24px rgba(12,22,48,0.06);"></div><div style="font-size:12.5px; color:#4f7cff; font-weight:600; margin-bottom:8px;">3 июня 2026</div><div style="font:700 17px/1.3 'Onest',sans-serif; color:#0c1630;">Призёры региональной Спартакиады‑2026</div></div>
         <div><div style="aspect-ratio:16/10; border-radius:16px; background:url('images/news_fire.png') center/cover no-repeat; margin-bottom:16px; box-shadow:0 8px 24px rgba(12,22,48,0.06);"></div><div style="font-size:12.5px; color:#4f7cff; font-weight:600; margin-bottom:8px;">28 мая 2026</div><div style="font:700 17px/1.3 'Onest',sans-serif; color:#0c1630;">Новый набор: «Пожарная безопасность»</div></div>
@@ -412,17 +453,17 @@
     </div>
 
     <!-- CTA -->
-    <div style="margin:0 max(56px, calc(50vw - 640px)) 64px; background:linear-gradient(120deg,#4f7cff,#2f5bd8); border-radius:24px; padding:54px 48px; display:flex; justify-content:space-between; align-items:center; gap:32px;">
+    <div class="section-pad-x cta-block" style="margin:0 max(56px, calc(50vw - 640px)) 64px; background:linear-gradient(120deg,#4f7cff,#2f5bd8); border-radius:24px; padding:54px 48px; display:flex; justify-content:space-between; align-items:center; gap:32px;">
       <div>
-        <h2 style="font:800 34px/1.15 'Onest',sans-serif; color:#fff; margin:0 0 10px; letter-spacing:-.01em;">Подай заявление сегодня</h2>
+        <h2 class="section-title" style="font:800 34px/1.15 'Onest',sans-serif; color:#fff; margin:0 0 10px; letter-spacing:-.01em;">Подай заявление сегодня</h2>
         <p style="font-size:16px; color:#dbe5ff; margin:0;">Бюджетные места ограничены. Не откладывай поступление.</p>
       </div>
       <div style="background:#fff; color:#2f5bd8; font-weight:700; font-size:16px; padding:17px 32px; border-radius:14px; flex-shrink:0;">Подать заявление →</div>
     </div>
 
     <!-- footer -->
-    <div style="background:#0c1630; color:#9fb0d4; padding:50px max(56px, calc(50vw - 640px)) 28px;">
-      <div style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1.1fr; gap:36px; padding-bottom:34px; border-bottom:1px solid #1c2c4a;">
+    <div class="section-pad" style="background:#0c1630; color:#9fb0d4; padding:50px max(56px, calc(50vw - 640px)) 28px;">
+      <div class="footer-grid" style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1.1fr; gap:36px; padding-bottom:34px; border-bottom:1px solid #1c2c4a;">
         <div>
           <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><div style="width:42px; height:42px; border-radius:11px; background:linear-gradient(135deg,#4f7cff,#2f5bd8); display:flex; align-items:center; justify-content:center; color:#fff; font:800 17px/1 'Onest',sans-serif;">Б</div><div style="color:#fff; font:700 14px/1.3 'Onest',sans-serif;">БПК им. В. В. Бурцева</div></div>
           <p style="font-size:13px; line-height:1.6; margin:0;">Областное государственное автономное профессиональное образовательное учреждение. г. Белгород.</p>
@@ -431,7 +472,7 @@
         <div><div style="color:#fff; font-weight:700; font-size:14px; margin-bottom:14px;">Колледж</div><div style="display:flex; flex-direction:column; gap:10px; font-size:13.5px;"><span>О колледже</span><span>Руководство</span><span>Сведения об ОО</span><span>Контакты</span></div></div>
         <div><div style="color:#fff; font-weight:700; font-size:14px; margin-bottom:14px;">Контакты</div><div style="display:flex; flex-direction:column; gap:10px; font-size:13.5px;"><span>г. Белгород, ул. Будённого, 1</span><span style="color:#7fa0ff;">+7 (4722) 00‑00‑00</span><span>info@collegelaw.ru</span></div></div>
       </div>
-      <div style="display:flex; justify-content:space-between; padding-top:20px; font-size:12.5px; color:#5d6a86;"><span>© 2026 БПК им. В. В. Бурцева</span><span>Политика конфиденциальности · Карта сайта</span></div>
+      <div class="footer-bottom" style="display:flex; justify-content:space-between; padding-top:20px; font-size:12.5px; color:#5d6a86;"><span>© 2026 БПК им. В. В. Бурцева</span><span>Политика конфиденциальности · Карта сайта</span></div>
     </div>
 
 </div>
